@@ -101,5 +101,46 @@ A consulta retorna as regiões que apresentaram, em média, baixas taxas de mort
 
 <img width="310" height="67" alt="image" src="https://github.com/user-attachments/assets/70b84c8b-511a-4d8f-817b-54b8aa27375a" />
 
+---
+
+### 📌 Case 4 – Evolução da Expectativa de Vida na América Latina e Caribe (1990–2020)
+
+Compare os valores de expectativa de vida mínima, média e máxima entre os países da América Latina e Caribe ao longo das décadas de 1990, 2000, 2010 e 2020. A análise deve destacar possíveis evoluções no indicador ao longo do tempo e também chamar atenção para eventuais valores fora do padrão.
+
+💻 Código SQL:
+
+```sql
+SELECT c.wb_regions,
+	   le.ref_year, 
+	   MIN(le.tot_years) AS min_expectancy,
+	   ROUND(AVG(le.tot_years),2) AS avg_expectancy,
+	   MAX(le.tot_years) AS max_expectancy
+FROM life_expectancy le 
+JOIN country c ON le.country = c.country
+WHERE c.wb_regions = 'Latin America & Caribbean'
+	AND le.ref_year IN (1990, 2000, 2010, 2020)
+GROUP BY c.wb_regions, le.ref_year;
+```
+
+📊 Análise:
+
+• Essa consulta permite observar a evolução da expectativa de vida na região da América Latina e Caribe ao longo de quatro décadas, com base nos valores mínimos, médios e máximos registrados a cada ano analisado.
+
+📈 Evolução identificada:
+
+• A média da expectativa de vida apresenta um crescimento constante entre as décadas de 1990 e 2020, indicando avanços consistentes em áreas como saúde pública, nutrição e saneamento.
+
+🔎 Dado que se destaca:
+
+• Em 2010, observa-se um valor mínimo anormalmente baixo, de apenas 35,5 anos, enquanto nas décadas anterior e seguinte os valores mínimos foram 57,4 anos (2000) e 63,6 anos (2020).
+
+• Esse dado pode refletir situações pontuais de crise sanitária, violência ou instabilidade extrema em um país específico naquele período.
+
+🎯 Resultado:
+
+<img width="747" height="100" alt="image" src="https://github.com/user-attachments/assets/96efdc1b-a084-4f7b-be59-d4ebb4d98813" />
+
+
+
 
 
